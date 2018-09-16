@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class Condition
+    public class Condition
     {
 
         public Condition(string name, int min, int max)

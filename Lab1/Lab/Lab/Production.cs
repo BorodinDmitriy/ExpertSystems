@@ -13,6 +13,11 @@ namespace Lab
             this._Conditions = new List<Condition>();
             this._Facts = new List<Fact>();
         }
+
+        public bool CheckFactInConditions(List<Fact> facts)
+        {
+            return true;
+        }
         
 
         public void AddFact(Fact newFact)

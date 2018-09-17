@@ -117,21 +117,95 @@ namespace Lab1
                 start = point + 1;
                 List<Condition> conditions = this._Productions[point].Conditions;
 
-               /* List<Condition> localGoals = resolveConditions(conditions, facts);
+                List<Condition> localGoals = resolveConditions(conditions, facts);
                 if (localGoals.Count == 0)
                 {
                     this._CurrentDeep--;
                     return true;
-                }*/
+                }
+
+                state = ReverseLoop(localGoals, facts);
+                if (state)
+                {
+                    this._CurrentDeep--;
+                    return state;
+                }
             }
             this._CurrentDeep--;
             return false;
         }
 
+        private bool ReverseLoop(List<Condition> goals, List<Fact> facts)
+        {
+            bool state = false;
+            int start = 0;
+            while (!state)
+            {
+                int point = FindProductionsByGoal(goals, start);
+                if (point == -1)
+                {
+                    break;
+                }
+                start = point + 1;
+                List<Condition> conditions = this._Productions[point].Conditions;
+                conditions.AddRange(goals);
+
+                List<Condition> localGoals = resolveConditions(conditions, facts);
+                if (localGoals.Count == 0)
+                {
+                    this._CurrentDeep--;
+                    return true;
+                }
+
+                state = ReverseLoop(localGoals, facts);
+                if (state)
+                {
+                    this._CurrentDeep--;
+                    return state;
+                }
+            }
+            this._CurrentDeep--;
+            return false;
+        }
+
+
+
         /*private List<Condition> resolveConditions(List<Condition> conditions, List<Fact> facts)
         {
             
         }*/
+
+        private int FindProductionsByGoal(List<Condition> goals, int start)
+        {
+            for (int I = 0; I < this._Productions.Count; I++)
+            {
+                List<Fact> facts = this._Productions[I].Facts;
+                for (int J = 0; J < facts.Count; J++)
+                {
+                    int index = goals.FindIndex((item) => { return ((item.Name == facts[J].Name) && (item.Min >= facts[J].Value) && (item.Max <= facts[J].Value)); });
+                    if (index >= 0)
+                    {
+                        return index;
+                    }
+                }
+            }
+            return -1;
+        }
+
+        private List<Condition> resolveConditions(List<Condition> conditions, List<Fact> facts)
+        {
+            List<Condition> remainingGoals = new List<Condition>();
+            for (int I = 0; I < conditions.Count; I++)
+            {
+                int index = facts.FindIndex((item) => { return item.Name == conditions[I].Name; });
+                bool state = conditions[I].CheckCondition(facts[index]);
+                if (!state)
+                {
+                    remainingGoals.Add(conditions[I]);
+                }
+            }
+            return remainingGoals;
+        }
 
         private int FindProductionsByGoal(List<Fact> goals, int start)
         {
@@ -139,11 +213,11 @@ namespace Lab1
             {
                 for (int J = 0; J < goals.Count; J++)
                 {
-                    /*int index = this._Productions[I].Facts.FindIndex((item) => { return ((item.Name == goals[J].Name) && (item.Value == goals[J].Value});
+                    int index = this._Productions[I].Facts.FindIndex((item) => { return ((item.Name == goals[J].Name) && (item.Value == goals[J].Value)); });
                     if (index >= 0)
                     {
                         return I;
-                    }*/
+                    }
                 }
             }
             return -1;

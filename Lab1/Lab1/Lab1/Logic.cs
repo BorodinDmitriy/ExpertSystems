@@ -336,7 +336,7 @@ namespace Lab1
             item.AddCondition(new Condition("B2", 1, 3));
             item.AddCondition(new Condition("C2", 0, 3));
             item.AddCondition(new Condition("A3", 0, 2));
-            item.AddCondition(new Condition("B3", 1, 2));
+            item.AddCondition(new Condition("B3", 0, 2));
             item.AddCondition(new Condition("C3", 0, 0));
 
             item.AddFact(new Fact("Number", 9));

@@ -145,15 +145,15 @@ namespace Lab1
             int divider = (tableSize / 3);
 
             checkingFacts.Add(createFact(dataGridView1, "A1", 0, divider, 0, divider));
-            checkingFacts.Add(createFact(dataGridView1, "A2", divider, 2 * divider, 0, divider));
-            checkingFacts.Add(createFact(dataGridView1, "A3", 2 * divider, tableSize, 0, divider));
+            checkingFacts.Add(createFact(dataGridView1, "B1", divider, 2 * divider, 0, divider));
+            checkingFacts.Add(createFact(dataGridView1, "C1", 2 * divider, tableSize, 0, divider));
 
-            checkingFacts.Add(createFact(dataGridView1, "B1", 0, divider, divider, 2 * divider));
+            checkingFacts.Add(createFact(dataGridView1, "A2", 0, divider, divider, 2 * divider));
             checkingFacts.Add(createFact(dataGridView1, "B2", divider, 2 * divider, divider, 2 * divider));
-            checkingFacts.Add(createFact(dataGridView1, "B3", 2 * divider, tableSize, divider, 2 * divider));
+            checkingFacts.Add(createFact(dataGridView1, "C2", 2 * divider, tableSize, divider, 2 * divider));
 
-            checkingFacts.Add(createFact(dataGridView1, "C1", 0, divider, 2 * divider, tableSize));
-            checkingFacts.Add(createFact(dataGridView1, "C2", divider, 2 * divider, 2 * divider, tableSize));
+            checkingFacts.Add(createFact(dataGridView1, "A3", 0, divider, 2 * divider, tableSize));
+            checkingFacts.Add(createFact(dataGridView1, "B3", divider, 2 * divider, 2 * divider, tableSize));
             checkingFacts.Add(createFact(dataGridView1, "C3", 2 * divider, tableSize, 2 * divider, tableSize));
 
             int value = (int)numericUpDown1.Value;

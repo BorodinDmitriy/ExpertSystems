@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab
+namespace Lab1
 {
     public class Production
     {
@@ -18,7 +18,19 @@ namespace Lab
         {
             return true;
         }
+
+        public bool CheckConditions(List<Fact> facts)
+        {
+            return true;
+        }
         
+        public List<Fact> Facts
+        {
+            get
+            {
+                return this._Facts;
+            }
+        }
 
         public void AddFact(Fact newFact)
         {

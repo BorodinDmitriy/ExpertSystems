@@ -254,15 +254,15 @@ namespace Lab1
 
             //  Nine
             item = new Production();
-            item.AddCondition(new Condition("A1", 0, 3));
-            item.AddCondition(new Condition("B1", 1, 3));
-            item.AddCondition(new Condition("C1", 0, 3));
-            item.AddCondition(new Condition("A2", 0, 3));
-            item.AddCondition(new Condition("B2", 2, 3));
+            item.AddCondition(new Condition("A1", 0, 2));
+            item.AddCondition(new Condition("B1", 2, 2));
+            item.AddCondition(new Condition("C1", 0, 2));
+            item.AddCondition(new Condition("A2", 0, 1));
+            item.AddCondition(new Condition("B2", 1, 3));
             item.AddCondition(new Condition("C2", 0, 3));
             item.AddCondition(new Condition("A3", 0, 2));
-            item.AddCondition(new Condition("B3", 1, 3));
-            item.AddCondition(new Condition("C3", 0, 3));
+            item.AddCondition(new Condition("B3", 1, 2));
+            item.AddCondition(new Condition("C3", 0, 0));
 
             item.AddFact(new Fact("Number", 9));
 

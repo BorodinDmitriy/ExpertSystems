@@ -163,6 +163,10 @@ namespace Lab1
             {
                 label3.Text = logic.DirectOutput(checkingGoals, checkingFacts).ToString();
             }
+            else
+            {
+                label3.Text = logic.ReverseOutput(checkingGoals, checkingFacts).ToString();
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)

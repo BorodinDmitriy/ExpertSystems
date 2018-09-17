@@ -30,7 +30,7 @@ namespace Lab1
         public Form1()
         {
             InitializeComponent();
-            
+            MyTest();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -69,35 +69,41 @@ namespace Lab1
 
         }
 
-        private void InitializeProduction()
+        private void MyTest()
         {
-            // One
-            Production item = new Production();
-            item.AddCondition(new Condition("A1", 0, 3));
-            item.AddCondition(new Condition("B1", 0, 3));
-            item.AddCondition(new Condition("C1", 0, 2));
-            item.AddCondition(new Condition("A2", 0, 3));
-            item.AddCondition(new Condition("B2", 0, 3));
-            item.AddCondition(new Condition("C2", 0, 2));
-            item.AddCondition(new Condition("A3", 0, 3));
-            item.AddCondition(new Condition("B3", 1, 3));
-            item.AddCondition(new Condition("C3", 0, 3));
+            List<Fact> number = new List<Fact>();
+            List<Fact> goal = new List<Fact>();
 
-            item.AddFact(new Fact("Number", 1));
+            /*number.Add(new Fact("A1", 0));
+            number.Add(new Fact("B1", 1));
+            number.Add(new Fact("C1", 0));
+            number.Add(new Fact("A2", 0));
+            number.Add(new Fact("B2", 3));
+            number.Add(new Fact("C2", 0));
+            number.Add(new Fact("A3", 0));
+            number.Add(new Fact("B3", 3));
+            number.Add(new Fact("C3", 1));
 
-            logic.AddProduction(item);
+            goal.Add(new Fact("Number", 1));
+            */
 
-            //  Two
-            item = new Production();
-            item.AddCondition(new Condition("A1", 0, 2));
-            item.AddCondition(new Condition("B1", 1, 3));
-            item.AddCondition(new Condition("C1", 0, 3));
-            item.AddCondition(new Condition("A2", 0, 3));
-
-            //  Three
-
-
-            //  Four
+            number.Add(new Fact("A1", 1));
+            number.Add(new Fact("B1", 1));
+            number.Add(new Fact("C1", 0));
+            number.Add(new Fact("A2", 2));
+            number.Add(new Fact("B2", 3));
+            number.Add(new Fact("C2", 0));
+            number.Add(new Fact("A3", 0));
+            number.Add(new Fact("B3", 2));
+            number.Add(new Fact("C3", 0));
+            goal.Add(new Fact("Number", 1));
+            bool state = logic.DirectOutput(goal, number);
+            bool mistake = !state;
+            if (mistake)
+            {
+                int K = 0;
+                K++;
+            }
         }
     }
 }

@@ -220,6 +220,22 @@ namespace Lab1
             item.AddFact(new Fact("Number", 6));
 
             this._Productions.Add(item);
+
+            //  Seven
+            item = new Production();
+            item.AddCondition(new Condition("A1", 0, 2));
+            item.AddCondition(new Condition("B1", 2, 3));
+            item.AddCondition(new Condition("C1", 0, 3));
+            item.AddCondition(new Condition("A2", 0, 0));
+            item.AddCondition(new Condition("B2", 0, 2));
+            item.AddCondition(new Condition("C2", 0, 2));
+            item.AddCondition(new Condition("A3", 0, 2));
+            item.AddCondition(new Condition("B3", 2, 2));
+            item.AddCondition(new Condition("C3", 0, 0));
+
+            item.AddFact(new Fact("Number", 7));
+
+            this._Productions.Add(item);
         }
     }
 }

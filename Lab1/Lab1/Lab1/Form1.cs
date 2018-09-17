@@ -23,11 +23,14 @@ namespace Lab1
                 colPosition = c;
             }
         }
+
+        private Logic logic = new Logic();
         private int tableSize = 6;
         private List<CellPoint> selectedCells;
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -59,6 +62,42 @@ namespace Lab1
             {
                 dataGridView1.Rows[a.rowPosition].Cells[a.colPosition].Selected = true;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitializeProduction()
+        {
+            // One
+            Production item = new Production();
+            item.AddCondition(new Condition("A1", 0, 3));
+            item.AddCondition(new Condition("B1", 0, 3));
+            item.AddCondition(new Condition("C1", 0, 2));
+            item.AddCondition(new Condition("A2", 0, 3));
+            item.AddCondition(new Condition("B2", 0, 3));
+            item.AddCondition(new Condition("C2", 0, 2));
+            item.AddCondition(new Condition("A3", 0, 3));
+            item.AddCondition(new Condition("B3", 1, 3));
+            item.AddCondition(new Condition("C3", 0, 3));
+
+            item.AddFact(new Fact("Number", 1));
+
+            logic.AddProduction(item);
+
+            //  Two
+            item = new Production();
+            item.AddCondition(new Condition("A1", 0, 2));
+            item.AddCondition(new Condition("B1", 1, 3));
+            item.AddCondition(new Condition("C1", 0, 3));
+            item.AddCondition(new Condition("A2", 0, 3));
+
+            //  Three
+
+
+            //  Four
         }
     }
 }

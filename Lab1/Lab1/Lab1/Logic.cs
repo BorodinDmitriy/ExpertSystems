@@ -28,8 +28,6 @@ namespace Lab1
             bool result = false;
 
             this._CurrentDeep = 0;
-            List<Fact> localFacts = new List<Fact>();
-            localFacts.AddRange(facts);
 
             //  П.1 Проверка цели и фактов
             result = CheckGoals(goals, facts);
@@ -66,7 +64,7 @@ namespace Lab1
                 localFacts.AddRange(facts);
                 localFacts.AddRange(this._Productions[point].Facts);
 
-                state = CheckGoals(goals, facts);
+                state = CheckGoals(goals, localFacts);
                 if (state)
                 {
                     return state;
@@ -79,9 +77,10 @@ namespace Lab1
 
                 this._CurrentDeep++;
                 state = DirectLoop(goals, localFacts);
-                if (!state)
+                if (state)
                 {
-                    continue;
+                    this._CurrentDeep--;
+                    return true;
                 }
             }
             this._CurrentDeep--;

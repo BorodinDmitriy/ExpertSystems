@@ -16,11 +16,32 @@ namespace Lab1
 
         public bool CheckFactInConditions(List<Fact> facts)
         {
+            for (int I = 0; I < this._Conditions.Count; I++)
+            {
+                int index = facts.FindIndex((item) =>
+                {
+                    return this._Conditions[I].Name == item.Name;
+                });
+
+                if (index < 0)
+                    return false;
+            }
             return true;
         }
 
         public bool CheckConditions(List<Fact> facts)
         {
+            for (int I = 0; I < facts.Count; I++)
+            {
+                Condition curCondition = this._Conditions.Find((item) => { return item.Name == facts[I].Name; });
+                if (curCondition == null)
+                    continue;
+                bool state = curCondition.CheckCondition(facts[I]);
+                if (!state)
+                {
+                    return false;
+                }
+            }
             return true;
         }
         

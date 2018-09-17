@@ -11,7 +11,7 @@ namespace Lab1
         public Logic()
         {
             this._Productions = new List<Production>();
-            this._MaxDeep = 100;
+            this._MaxDeep = 8;
             this._CurrentDeep = 0;
             InitializeProduction();
 
@@ -55,14 +55,15 @@ namespace Lab1
                     break;
                 }
                 start = point + 1;
-                bool status = _Productions[point].CheckConditions(facts);
+                bool status = this._Productions[point].CheckConditions(facts);
                 if (!status)
                 {
                     continue;
                 }
                 List<Fact> localFacts = new List<Fact>();
                 localFacts.AddRange(facts);
-                localFacts.AddRange(this._Productions[point].Facts);
+                AddUniqFact(ref localFacts, this._Productions[point].Facts);
+
 
                 state = CheckGoals(goals, localFacts);
                 if (state)
@@ -123,6 +124,19 @@ namespace Lab1
             return -1;
         }
 
+        private void AddUniqFact(ref List<Fact> dest, List<Fact> src)
+        {
+            for (int I = 0; I < src.Count; I++)
+            {
+                int index = dest.FindIndex((item) => { return item.Name == src[I].Name; });
+                if (index < 0)
+                {
+                    dest.Add(src[I]);
+                }
+            }
+            return;
+        }
+
         private void InitializeProduction()
         {
             // One
@@ -144,11 +158,11 @@ namespace Lab1
             //  Two
             item = new Production();
             item.AddCondition(new Condition("A1", 0, 2));
-            item.AddCondition(new Condition("B1", 2, 3));
-            item.AddCondition(new Condition("C1", 2, 3));
-            item.AddCondition(new Condition("A2", 0, 3));
-            item.AddCondition(new Condition("B2", 2, 3));
-            item.AddCondition(new Condition("C2", 0, 2));
+            item.AddCondition(new Condition("B1", 2, 2));
+            item.AddCondition(new Condition("C1", 2, 2));
+            item.AddCondition(new Condition("A2", 0, 1));
+            item.AddCondition(new Condition("B2", 1, 2));
+            item.AddCondition(new Condition("C2", 0, 1));
             item.AddCondition(new Condition("A3", 0, 3));
             item.AddCondition(new Condition("B3", 2, 3));
             item.AddCondition(new Condition("C3", 0, 2));
@@ -193,11 +207,11 @@ namespace Lab1
             item.AddCondition(new Condition("A1", 0, 3));
             item.AddCondition(new Condition("B1", 2, 3));
             item.AddCondition(new Condition("C1", 1, 2));
-            item.AddCondition(new Condition("A2", 1, 2));
-            item.AddCondition(new Condition("B2", 2, 3));
-            item.AddCondition(new Condition("C2", 0, 3));
+            item.AddCondition(new Condition("A2", 0, 2));
+            item.AddCondition(new Condition("B2", 2, 2));
+            item.AddCondition(new Condition("C2", 0, 2));
             item.AddCondition(new Condition("A3", 0, 2));
-            item.AddCondition(new Condition("B3", 2, 3));
+            item.AddCondition(new Condition("B3", 2, 2));
             item.AddCondition(new Condition("C3", 0, 2));
 
             item.AddFact(new Fact("Number", 5));

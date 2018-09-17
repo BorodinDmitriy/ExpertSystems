@@ -17,21 +17,54 @@ namespace Lab
         {
             bool result = false;
 
-            List<int> pointer = new List<int>();
+            List<Fact> localFacts = new List<Fact>();
+            localFacts.AddRange(facts);
 
             //  П.1 Проверка цели и фактов
             result = CheckGoals(goals, facts);
             if (result)
                 return result;
 
+            List<int> pointer = new List<int>();
 
+            bool state = false;
+            int start = 0;
+
+            while (!state)
+            {
+                
+                int point = FindProductions(localFacts, start);
+                if (point == -1)
+                {
+                    if (pointer.Count == 0)
+                    {
+                        state = true;
+                    }
+                    else
+                    {
+                        start = pointer.Last();
+                        pointer.RemoveAt(pointer.Count);
+                        continue;
+                    }
+                }
+
+                pointer.Add(point + 1);
+                start = point + 1;
+
+                bool status = _Productions[point].CheckConditions(localFacts);
+                if (!status)
+                {
+                    continue;
+                }
+                localFacts.AddRange(this._Productions[point].Facts);
+            }
 
             return result;
         }
 
 
  
-        private List<Production> _Productions;
+        private List<Production> _Productions = new List<Production>();
 
         private bool CheckGoals(List<Fact> goals, List<Fact> facts)
         {
@@ -52,6 +85,21 @@ namespace Lab
             }
 
             return result;
+        }
+
+        private int FindProductions(List<Fact> facts, int start)
+        {
+            bool state = false;
+            for (int I = start; I < _Productions.Count; I++)
+            {
+                state = _Productions[I].CheckFactInConditions(facts);
+                if (state)
+                {
+                    return I;
+                }
+            }
+
+            return -1;
         }
     }
 }

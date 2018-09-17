@@ -34,8 +34,9 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -59,6 +60,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Очистить поле";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // button2
             // 
@@ -68,6 +70,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "Проверить!";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // comboBox1
             // 
@@ -110,6 +113,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Продукционный вывод";
             // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(6, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 37);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Целевая цифра";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -119,19 +130,21 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Тип";
             // 
-            // label2
+            // label3
             // 
-            this.label2.Location = new System.Drawing.Point(6, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 37);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Целевая цифра";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(230, 201);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 17);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "label3";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 232);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Form1";
@@ -142,6 +155,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -155,6 +169,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
     }
 }
 

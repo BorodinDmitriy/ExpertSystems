@@ -117,21 +117,21 @@ namespace Lab1
                 start = point + 1;
                 List<Condition> conditions = this._Productions[point].Conditions;
 
-                List<Condition> localGoals = resolveConditions(conditions, facts);
+               /* List<Condition> localGoals = resolveConditions(conditions, facts);
                 if (localGoals.Count == 0)
                 {
                     this._CurrentDeep--;
                     return true;
-                }
+                }*/
             }
             this._CurrentDeep--;
             return false;
         }
 
-        private List<Condition> resolveConditions(List<Condition> conditions, List<Fact> facts)
+        /*private List<Condition> resolveConditions(List<Condition> conditions, List<Fact> facts)
         {
             
-        }
+        }*/
 
         private int FindProductionsByGoal(List<Fact> goals, int start)
         {
@@ -139,11 +139,11 @@ namespace Lab1
             {
                 for (int J = 0; J < goals.Count; J++)
                 {
-                    int index = this._Productions[I].Facts.FindIndex((item) => { return ((item.Name == goals[J].Name) && (item.Value == goals[J].Value});
+                    /*int index = this._Productions[I].Facts.FindIndex((item) => { return ((item.Name == goals[J].Name) && (item.Value == goals[J].Value});
                     if (index >= 0)
                     {
                         return I;
-                    }
+                    }*/
                 }
             }
             return -1;

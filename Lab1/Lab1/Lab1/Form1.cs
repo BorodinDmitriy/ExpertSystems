@@ -27,6 +27,8 @@ namespace Lab1
         private Logic logic = new Logic();
         private int tableSize = 6;
         private List<CellPoint> selectedCells;
+        private List<Fact> checkingFacts;
+        private List<Fact> checkingGoals;
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +37,7 @@ namespace Lab1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            comboBox1.SelectedIndex = 0;
             dataGridView1.RowCount = tableSize;
             dataGridView1.ColumnCount = tableSize;
             dataGridView1.RowHeadersVisible = false;
@@ -52,7 +55,7 @@ namespace Lab1
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e){
-        
+
             CellPoint selectedCell = new CellPoint(dataGridView1.CurrentCell.RowIndex, dataGridView1.CurrentCell.ColumnIndex);
             if (!selectedCells.Contains(selectedCell))
             {
@@ -60,14 +63,11 @@ namespace Lab1
             }
             foreach (CellPoint a in selectedCells)
             {
-                dataGridView1.Rows[a.rowPosition].Cells[a.colPosition].Selected = true;
+                if (!dataGridView1.Rows[a.rowPosition].Cells[a.colPosition].Selected)
+                    dataGridView1.Rows[a.rowPosition].Cells[a.colPosition].Selected = true;
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void MyTest()
         {
@@ -103,6 +103,78 @@ namespace Lab1
             {
                 int K = 0;
                 K++;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private int countPixels(DataGridView dgw, int left, int right, int top, int bottom)
+        {
+            int result = 0;
+            for (int i = left; i < right; i++)
+            {
+                for (int j = top; j < bottom; j++)
+                {
+                    if (dgw.Rows[j].Cells[i].Selected)
+                    {
+                        result++;
+                    }
+                }
+            }
+            return result;
+        }
+
+        private Fact createFact(DataGridView dgw, String name, int left, int right, int top, int bottom)
+        {
+            return new Fact(name, countPixels(dgw, left, right, top, bottom));
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            checkingFacts = new List<Fact>();
+            checkingGoals = new List<Fact>();
+
+            int divider = (tableSize / 3);
+
+            checkingFacts.Add(createFact(dataGridView1, "A1", 0, divider, 0, divider));
+            checkingFacts.Add(createFact(dataGridView1, "A2", divider, 2 * divider, 0, divider));
+            checkingFacts.Add(createFact(dataGridView1, "A3", 2 * divider, tableSize, 0, divider));
+
+            checkingFacts.Add(createFact(dataGridView1, "B1", 0, divider, divider, 2 * divider));
+            checkingFacts.Add(createFact(dataGridView1, "B2", divider, 2 * divider, divider, 2 * divider));
+            checkingFacts.Add(createFact(dataGridView1, "B3", 2 * divider, tableSize, divider, 2 * divider));
+
+            checkingFacts.Add(createFact(dataGridView1, "C1", 0, divider, 2 * divider, tableSize));
+            checkingFacts.Add(createFact(dataGridView1, "C2", divider, 2 * divider, 2 * divider, tableSize));
+            checkingFacts.Add(createFact(dataGridView1, "C3", 2 * divider, tableSize, 2 * divider, tableSize));
+
+            int value = (int)numericUpDown1.Value;
+
+            checkingGoals.Add(new Fact("Number", value));
+            if (comboBox1.SelectedIndex == 0)
+            {
+                label3.Text = logic.DirectOutput(checkingGoals, checkingFacts).ToString();
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            while (selectedCells.Count > 0)
+            {
+                CellPoint a = selectedCells[0];
+                if (dataGridView1.Rows[a.rowPosition].Cells[a.colPosition].Selected)
+                {
+                    dataGridView1.Rows[a.rowPosition].Cells[a.colPosition].Selected = false;
+                    selectedCells.Remove(a);
+                }
             }
         }
     }

@@ -4,19 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab
+namespace Lab1
 {
     public class Logic
     {
         public Logic()
         {
+            this._Productions = new List<Production>();
+            this._MaxDeep = 100;
+            this._CurrentDeep = 0;
+            InitializeProduction();
 
+        }
+
+        public void AddProduction(Production newItem)
+        {
+            this._Productions.Add(newItem);
+            return;
         }
 
         public bool DirectOutput(List<Fact> goals, List<Fact> facts)
         {
             bool result = false;
 
+            this._CurrentDeep = 0;
             List<Fact> localFacts = new List<Fact>();
             localFacts.AddRange(facts);
 
@@ -25,46 +36,57 @@ namespace Lab
             if (result)
                 return result;
 
-            List<int> pointer = new List<int>();
+            result = DirectLoop(goals, facts);
+            return result;
+        }
+ 
+        private List<Production> _Productions;
+        private int _MaxDeep;
+        private int _CurrentDeep;
 
+
+        private bool DirectLoop(List<Fact> goals, List<Fact> facts)
+        {
             bool state = false;
             int start = 0;
-
-            while (!state)
+            while(!state)
             {
-                
-                int point = FindProductions(localFacts, start);
+                int point = FindProductions(facts, start);
                 if (point == -1)
                 {
-                    if (pointer.Count == 0)
-                    {
-                        state = true;
-                    }
-                    else
-                    {
-                        start = pointer.Last();
-                        pointer.RemoveAt(pointer.Count);
-                        continue;
-                    }
+                    break;
                 }
-
-                pointer.Add(point + 1);
                 start = point + 1;
-
-                bool status = _Productions[point].CheckConditions(localFacts);
+                bool status = _Productions[point].CheckConditions(facts);
                 if (!status)
                 {
                     continue;
                 }
+                List<Fact> localFacts = new List<Fact>();
+                localFacts.AddRange(facts);
                 localFacts.AddRange(this._Productions[point].Facts);
+
+                state = CheckGoals(goals, facts);
+                if (state)
+                {
+                    return state;
+                }
+
+                if (this._CurrentDeep + 1 > this._MaxDeep)
+                {
+                    break;
+                }
+
+                this._CurrentDeep++;
+                state = DirectLoop(goals, localFacts);
+                if (!state)
+                {
+                    continue;
+                }
             }
-
-            return result;
+            this._CurrentDeep--;
+            return false;
         }
-
-
- 
-        private List<Production> _Productions = new List<Production>();
 
         private bool CheckGoals(List<Fact> goals, List<Fact> facts)
         {
@@ -100,6 +122,37 @@ namespace Lab
             }
 
             return -1;
+        }
+
+        private void InitializeProduction()
+        {
+            // One
+            Production item = new Production();
+            item.AddCondition(new Condition("A1", 0, 3));
+            item.AddCondition(new Condition("B1", 0, 3));
+            item.AddCondition(new Condition("C1", 0, 2));
+            item.AddCondition(new Condition("A2", 0, 3));
+            item.AddCondition(new Condition("B2", 0, 3));
+            item.AddCondition(new Condition("C2", 0, 2));
+            item.AddCondition(new Condition("A3", 0, 3));
+            item.AddCondition(new Condition("B3", 1, 3));
+            item.AddCondition(new Condition("C3", 0, 3));
+
+            item.AddFact(new Fact("Number", 1));
+
+            this._Productions.Add(item);
+
+            //  Two
+            item = new Production();
+            item.AddCondition(new Condition("A1", 0, 2));
+            item.AddCondition(new Condition("B1", 1, 3));
+            item.AddCondition(new Condition("C1", 0, 3));
+            item.AddCondition(new Condition("A2", 0, 3));
+
+            //  Three
+
+
+            //  Four
         }
     }
 }

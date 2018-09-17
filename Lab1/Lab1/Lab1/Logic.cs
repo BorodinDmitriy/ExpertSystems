@@ -237,6 +237,22 @@ namespace Lab1
 
             this._Productions.Add(item);
 
+            //  Eight
+            item = new Production();
+            item.AddCondition(new Condition("A1", 0, 3));
+            item.AddCondition(new Condition("B1", 1, 3));
+            item.AddCondition(new Condition("C1", 0, 3));
+            item.AddCondition(new Condition("A2", 0, 3));
+            item.AddCondition(new Condition("B2", 2, 3));
+            item.AddCondition(new Condition("C2", 0, 3));
+            item.AddCondition(new Condition("A3", 0, 3));
+            item.AddCondition(new Condition("B3", 1, 3));
+            item.AddCondition(new Condition("C3", 0, 3));
+
+            item.AddFact(new Fact("Number", 8));
+
+            this._Productions.Add(item);
+
             //  Nine
             item = new Production();
             item.AddCondition(new Condition("A1", 0, 3));

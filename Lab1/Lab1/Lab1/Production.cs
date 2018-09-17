@@ -53,6 +53,14 @@ namespace Lab1
             }
         }
 
+        public List<Condition> Conditions
+        {
+            get
+            {
+                return this._Conditions;
+            }
+        }
+
         public void AddFact(Fact newFact)
         {
             this._Facts.Add(newFact);

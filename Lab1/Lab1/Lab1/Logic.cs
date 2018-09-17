@@ -37,6 +37,21 @@ namespace Lab1
             result = DirectLoop(goals, facts);
             return result;
         }
+
+        public bool ReverseOutput(List<Fact> goals, List<Fact> facts)
+        {
+            bool result = false;
+
+            this._CurrentDeep = 0;
+
+            //  П.1 Проверка цели и фактов
+            result = CheckGoals(goals, facts);
+            if (result)
+                return result;
+
+            result = ReverseLoop(goals, facts);
+            return result;
+        }
  
         private List<Production> _Productions;
         private int _MaxDeep;
@@ -86,6 +101,52 @@ namespace Lab1
             }
             this._CurrentDeep--;
             return false;
+        }
+
+        private bool ReverseLoop(List<Fact> goals, List<Fact> facts)
+        {
+            bool state = false;
+            int start = 0;
+            while (!state)
+            {
+                int point = FindProductionsByGoal(goals, start);
+                if (point == -1)
+                {
+                    break;
+                }
+                start = point + 1;
+                List<Condition> conditions = this._Productions[point].Conditions;
+
+                List<Condition> localGoals = resolveConditions(conditions, facts);
+                if (localGoals.Count == 0)
+                {
+                    this._CurrentDeep--;
+                    return true;
+                }
+            }
+            this._CurrentDeep--;
+            return false;
+        }
+
+        private List<Condition> resolveConditions(List<Condition> conditions, List<Fact> facts)
+        {
+            
+        }
+
+        private int FindProductionsByGoal(List<Fact> goals, int start)
+        {
+            for (int I = start; I < this._Productions.Count; I++)
+            {
+                for (int J = 0; J < goals.Count; J++)
+                {
+                    int index = this._Productions[I].Facts.FindIndex((item) => { return ((item.Name == goals[J].Name) && (item.Value == goals[J].Value});
+                    if (index >= 0)
+                    {
+                        return I;
+                    }
+                }
+            }
+            return -1;
         }
 
         private bool CheckGoals(List<Fact> goals, List<Fact> facts)

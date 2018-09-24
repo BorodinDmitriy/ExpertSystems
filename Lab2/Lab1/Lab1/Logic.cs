@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Lab1
 {
@@ -13,6 +14,7 @@ namespace Lab1
             this._Productions = new List<Production>();
             this._MaxDeep = 8;
             this._CurrentDeep = 0;
+            this._Trace = new List<string>();
             InitializeProduction();
 
         }
@@ -28,6 +30,7 @@ namespace Lab1
             bool result = false;
 
             this._CurrentDeep = 0;
+            this._Trace = new List<string>();
 
             //  П.1 Проверка цели и фактов
             result = CheckGoals(goals, facts);
@@ -35,6 +38,10 @@ namespace Lab1
                 return result;
 
             result = DirectLoop(goals, facts);
+
+            File.Delete("output.txt");
+            File.AppendAllLines("output.txt", this._Trace);
+
             return result;
         }
 
@@ -50,12 +57,14 @@ namespace Lab1
                 return result;
 
             result = ReverseLoop(goals, facts);
+            
             return result;
         }
  
         private List<Production> _Productions;
         private int _MaxDeep;
         private int _CurrentDeep;
+        private List<string> _Trace;
 
 
         private bool DirectLoop(List<Fact> goals, List<Fact> facts)
@@ -75,6 +84,7 @@ namespace Lab1
                 {
                     continue;
                 }
+                this._Trace.Add("Добавлены факты из правила №" + point + " , текущая глубина: " + this._CurrentDeep);
                 List<Fact> localFacts = new List<Fact>();
                 localFacts.AddRange(facts);
                 AddUniqFact(ref localFacts, this._Productions[point].Facts);
@@ -83,11 +93,13 @@ namespace Lab1
                 state = CheckGoals(goals, localFacts);
                 if (state)
                 {
+                    this._Trace.Add("Цель достигнута");
                     return state;
                 }
 
                 if (this._CurrentDeep + 1 > this._MaxDeep)
                 {
+                    this._Trace.Add("Достигнут лимит количества итераций");
                     break;
                 }
 
@@ -98,7 +110,9 @@ namespace Lab1
                     this._CurrentDeep--;
                     return true;
                 }
+                this._Trace.Add("Из списка фактов убраны добавленные факты, которые содержатся в правиле №" + point);
             }
+            this._Trace.Add("Нет доступных правил");
             this._CurrentDeep--;
             return false;
         }

@@ -32,7 +32,7 @@ namespace Lab1
         public Form1()
         {
             InitializeComponent();
-            MyTest();
+            //MyTest();
         }
 
         private void Form1_Load(object sender, EventArgs e)

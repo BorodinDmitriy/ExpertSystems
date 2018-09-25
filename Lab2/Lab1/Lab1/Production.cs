@@ -10,7 +10,7 @@ namespace Lab1
     {
         public Production()
         {
-            this._Conditions = new List<Condition>();
+            this._Conditions = new List<Fact>();
             this._Facts = new List<Fact>();
         }
 
@@ -31,12 +31,12 @@ namespace Lab1
 
         public bool CheckConditions(List<Fact> facts)
         {
-            for (int I = 0; I < facts.Count; I++)
+            for (int I = 0; I < this._Conditions.Count; I++)
             {
-                Condition curCondition = this._Conditions.Find((item) => { return item.Name == facts[I].Name; });
-                if (curCondition == null)
-                    continue;
-                bool state = curCondition.CheckCondition(facts[I]);
+                Fact curFact = facts.Find((item) => { return item.Name == this._Conditions[I].Name; });
+                if (curFact == null)
+                    return false;
+                bool state = this._Conditions[I].CheckCondition(curFact);
                 if (!state)
                 {
                     return false;
@@ -53,7 +53,7 @@ namespace Lab1
             }
         }
 
-        public List<Condition> Conditions
+        public List<Fact> Conditions
         {
             get
             {
@@ -73,19 +73,19 @@ namespace Lab1
             return;
         }
 
-        public void AddCondition(Condition newConditions)
+        public void AddCondition(Fact newConditions)
         {
             this._Conditions.Add(newConditions);
             return;
         }
 
-        public void AddRangeConditions(List<Condition> newConditions)
+        public void AddRangeConditions(List<Fact> newConditions)
         {
             this._Conditions.AddRange(newConditions);
             return;
         }
 
-        private List<Condition> _Conditions;
+        private List<Fact> _Conditions;
         private List<Fact> _Facts;
     }
 }

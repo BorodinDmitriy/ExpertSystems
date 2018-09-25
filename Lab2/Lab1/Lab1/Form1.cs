@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,7 @@ namespace Lab1
     
     public partial class Form1 : Form
     {
+        public delegate void ChangeInterface(bool answer);
         public class CellPoint
         {
             public int rowPosition;
@@ -69,43 +71,6 @@ namespace Lab1
         }
 
 
-        private void MyTest()
-        {
-            List<Fact> number = new List<Fact>();
-            List<Fact> goal = new List<Fact>();
-
-            /*number.Add(new Fact("A1", 0));
-            number.Add(new Fact("B1", 1));
-            number.Add(new Fact("C1", 0));
-            number.Add(new Fact("A2", 0));
-            number.Add(new Fact("B2", 3));
-            number.Add(new Fact("C2", 0));
-            number.Add(new Fact("A3", 0));
-            number.Add(new Fact("B3", 3));
-            number.Add(new Fact("C3", 1));
-
-            goal.Add(new Fact("Number", 1));
-            */
-
-            number.Add(new Fact("A1", 1));
-            number.Add(new Fact("B1", 1));
-            number.Add(new Fact("C1", 0));
-            number.Add(new Fact("A2", 2));
-            number.Add(new Fact("B2", 3));
-            number.Add(new Fact("C2", 0));
-            number.Add(new Fact("A3", 0));
-            number.Add(new Fact("B3", 2));
-            number.Add(new Fact("C3", 0));
-            goal.Add(new Fact("Number", 1));
-            bool state = logic.DirectOutput(goal, number);
-            bool mistake = !state;
-            if (mistake)
-            {
-                int K = 0;
-                K++;
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             
@@ -129,13 +94,15 @@ namespace Lab1
 
         private Fact createFact(DataGridView dgw, String name, int left, int right, int top, int bottom)
         {
-            return new Fact(name, countPixels(dgw, left, right, top, bottom));
+            return new Fact(name, "==" , countPixels(dgw, left, right, top, bottom));
         }
         private void button2_Click(object sender, EventArgs e)
         {
 
 
         }
+
+        
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -158,16 +125,44 @@ namespace Lab1
 
             int value = (int)numericUpDown1.Value;
 
-            checkingGoals.Add(new Fact("Number", value));
+            checkingGoals.Add(new Fact("Number", "==", value));
+            token = new CancellationToken();
+            this.label3.Text = "...";
             if (comboBox1.SelectedIndex == 0)
             {
-                label3.Text = logic.DirectOutput(checkingGoals, checkingFacts).ToString();
+                worker = new Task(StartDirectWork, token);
+
             }
             else
             {
-                label3.Text = logic.ReverseOutput(checkingGoals, checkingFacts).ToString();
+                worker = new Task(StartReverseWork, token); 
             }
+            worker.Start();
         }
+
+        private void StartDirectWork()
+        {
+            bool state = logic.DirectOutput(checkingGoals, checkingFacts);
+            ChangeInterface print = new ChangeInterface(PrintResult);
+            this.label3.BeginInvoke(print, state);
+            worker.Dispose();
+        }
+
+        private void StartReverseWork()
+        {
+            bool state = logic.ReverseOutput(checkingGoals, checkingFacts);
+            ChangeInterface print = new ChangeInterface(PrintResult);
+            this.label3.BeginInvoke(print, state);
+            worker.Dispose();
+        }
+
+        private void PrintResult(bool state)
+        {
+            this.label3.Text = state.ToString();
+        }
+
+        private Task worker;
+        private CancellationToken token;
 
         private void button1_Click_1(object sender, EventArgs e)
         {

@@ -8,12 +8,11 @@ namespace Lab1
 {
     public class Fact
     {
-        private string _Name;
-        private int _Value;
 
-        public Fact(string name, int value)
+        public Fact(string name, string predicat, int value)
         {
             this._Name = name;
+            this._Predicat = predicat;
             this._Value = value;
         }
 
@@ -30,6 +29,19 @@ namespace Lab1
             }
         }
 
+        public string Predicat
+        {
+            get
+            {
+                return this._Predicat;
+            }
+
+            set
+            {
+                this._Predicat = value;
+            }
+        }
+
         public int Value
         {
             get
@@ -42,5 +54,33 @@ namespace Lab1
                 this._Value = value;
             }
         }
+
+        public bool CheckCondition(Fact fact)
+        {
+            bool result = false;
+            if (fact.Name != this._Name)
+                return result;
+
+            switch (this._Predicat)
+            {
+                case "==":
+                    if (this._Value == fact._Value)
+                        return true;
+                    break;
+                case ">=":
+                    if (fact.Value >= this._Value)
+                        return true;
+                    break;
+                case "<=":
+                    if (fact.Value <= this._Value)
+                        return true;
+                    break;
+            }
+            return result;
+        }       
+
+        private string _Name;
+        private int _Value;
+        private string _Predicat;       
     }
 }

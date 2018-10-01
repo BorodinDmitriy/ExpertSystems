@@ -15,7 +15,8 @@ namespace Lab1
             this._MaxDeep = 200;
             this._CurrentDeep = 0;
             this._Trace = new List<string>();
-            InitializeProduction();
+            //InitializeProduction();
+            InitializeProductionSimple();
         }
 
         public void AddProduction(Production newItem)
@@ -101,6 +102,26 @@ namespace Lab1
                 localFacts.AddRange(facts);
                 AddUniqFact(ref localFacts, this._Productions[point].Facts);
 
+                if (facts.Count == localFacts.Count)
+                {
+                    bool change = false;
+                    for (int I = 0; I < facts.Count; I++)
+                    {
+                        int index = localFacts.FindIndex((item) => { return ((facts[I].Name == localFacts[I].Name) && (facts[I].Value == localFacts[I].Value)); });
+                        if (index < 0)
+                        {
+                            change = true;
+                            break;
+                        }
+                    }
+
+                    if (!change)
+                    {
+                        continue;
+                    }
+                }
+                
+                
 
                 state = CheckGoals(goals, localFacts);
                 if (state)
@@ -775,6 +796,314 @@ namespace Lab1
             item.AddCondition(new Fact("B3:2,3,0", "==", 1));
             item.AddCondition(new Fact("C3:2,5,6,8,0", "==", 1));
             item.AddFact(new Fact("Number", "==", 0));
+
+            this._Productions.Add(item);
+        }
+
+        private void InitializeProductionSimple()
+        {
+            // One
+            Production item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 1));
+
+            item.AddCondition(new Fact("B1", ">=", 2));
+            item.AddCondition(new Fact("B1", "<=", 3));
+
+            item.AddCondition(new Fact("C1", "==", 0));
+
+            item.AddCondition(new Fact("A2", "==", 1));
+
+            item.AddCondition(new Fact("B2", "==", 2));
+
+            item.AddCondition(new Fact("C2", "==", 0));
+
+            item.AddCondition(new Fact("A3", ">=", 1));
+            item.AddCondition(new Fact("A3", "<=", 2));
+
+            item.AddCondition(new Fact("B3", "==", 3));
+
+            item.AddCondition(new Fact("C3", ">=", 1));
+            item.AddCondition(new Fact("C3", "<=", 2));
+
+            item.AddFact(new Fact("Number", "==", 1));
+
+            this._Productions.Add(item);
+
+            //  Two
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 2));
+
+            item.AddCondition(new Fact("B1", "==", 2));
+
+            item.AddCondition(new Fact("C1", "==", 2));
+
+            item.AddCondition(new Fact("A2", ">=", 0));
+            item.AddCondition(new Fact("A2", "<=", 1));
+
+            item.AddCondition(new Fact("B2", ">=", 1));
+            item.AddCondition(new Fact("B2", "<=", 2));
+
+            item.AddCondition(new Fact("C2", ">=", 0));
+            item.AddCondition(new Fact("C2", "<=", 1));
+
+            item.AddCondition(new Fact("A3", ">=", 0));
+            item.AddCondition(new Fact("A3", "<=", 3));
+
+            item.AddCondition(new Fact("B3", ">=", 2));
+            item.AddCondition(new Fact("B3", "<=", 3));
+
+            item.AddCondition(new Fact("C3", ">=", 0));
+            item.AddCondition(new Fact("C3", "<=", 2));
+
+            item.AddFact(new Fact("Number", "==", 2));
+
+            this._Productions.Add(item);
+
+            //  Three
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 2));
+
+            item.AddCondition(new Fact("B1", ">=", 1));
+            item.AddCondition(new Fact("B1", "<=", 3));
+
+            item.AddCondition(new Fact("C1", ">=", 0));
+            item.AddCondition(new Fact("C1", "<=", 3));
+
+            item.AddCondition(new Fact("A2", ">=", 0));
+            item.AddCondition(new Fact("A2", "<=", 2));
+
+            item.AddCondition(new Fact("B2", ">=", 1));
+            item.AddCondition(new Fact("B2", "<=", 3));
+
+            item.AddCondition(new Fact("C2", ">=", 0));
+            item.AddCondition(new Fact("C2", "<=", 3));
+
+            item.AddCondition(new Fact("A3", ">=", 0));
+            item.AddCondition(new Fact("A3", "<=", 2));
+
+            item.AddCondition(new Fact("B3", ">=", 2));
+            item.AddCondition(new Fact("B3", "<=", 3));
+
+            item.AddCondition(new Fact("C3", ">=", 0));
+            item.AddCondition(new Fact("C3", "<=", 3));
+
+            item.AddFact(new Fact("Number", "==", 3));
+
+            this._Productions.Add(item);
+            //  Four
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 1));
+
+            item.AddCondition(new Fact("B1", ">=", 1));
+            item.AddCondition(new Fact("B1", "<=", 2));
+
+            item.AddCondition(new Fact("C1", "==", 2));
+
+            item.AddCondition(new Fact("A2", ">=", 1));
+            item.AddCondition(new Fact("A2", "<=", 3));
+
+            item.AddCondition(new Fact("B2", "==", 2));
+
+            item.AddCondition(new Fact("C2", ">=", 2));
+            item.AddCondition(new Fact("C2", "<=", 3));
+
+            item.AddCondition(new Fact("A3", "==", 0));
+
+            item.AddCondition(new Fact("B3", "==", 0));
+
+            item.AddCondition(new Fact("C3", "==", 2));
+
+            item.AddFact(new Fact("Number", "==", 4));
+
+            this._Productions.Add(item);
+
+            //  Five
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 3));
+
+            item.AddCondition(new Fact("B1", ">=", 2));
+            item.AddCondition(new Fact("B1", "<=", 3));
+
+            item.AddCondition(new Fact("C1", ">=", 1));
+            item.AddCondition(new Fact("C1", "<=", 2));
+
+            item.AddCondition(new Fact("A2", ">=", 0));
+            item.AddCondition(new Fact("A2", "<=", 2));
+
+            item.AddCondition(new Fact("B2", "==", 2));
+
+            item.AddCondition(new Fact("C2", ">=", 0));
+            item.AddCondition(new Fact("C2", "<=", 2));
+
+            item.AddCondition(new Fact("A3", ">=", 0));
+            item.AddCondition(new Fact("A3", "<=", 2));
+
+            item.AddCondition(new Fact("B3", "==", 2));
+
+            item.AddCondition(new Fact("C3", ">=", 0));
+            item.AddCondition(new Fact("C3", "<=", 2));
+
+            item.AddFact(new Fact("Number","==", 5));
+
+            this._Productions.Add(item);
+
+            //  Six
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 2));
+
+            item.AddCondition(new Fact("B1", "==", 2));
+
+            item.AddCondition(new Fact("C1", ">=", 0));
+            item.AddCondition(new Fact("C1", "<=", 2));
+
+            item.AddCondition(new Fact("A2", ">=", 0));
+            item.AddCondition(new Fact("A2", "<=", 3));
+
+            item.AddCondition(new Fact("B2", ">=", 2));
+            item.AddCondition(new Fact("B2", "<=", 3));
+
+            item.AddCondition(new Fact("C2", ">=", 0));
+            item.AddCondition(new Fact("C2", "<=", 2));
+
+            item.AddCondition(new Fact("A3", ">=", 0));
+            item.AddCondition(new Fact("A3", "<=", 2));
+
+            item.AddCondition(new Fact("B3", "==", 2));
+
+            item.AddCondition(new Fact("C3", ">=", 0));
+            item.AddCondition(new Fact("C3", "<=", 2));
+
+            item.AddFact(new Fact("Number","==", 6));
+
+            this._Productions.Add(item);
+
+            //  Seven
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 2));
+
+            item.AddCondition(new Fact("B1", ">=", 2));
+            item.AddCondition(new Fact("B1", "<=", 3));
+
+            item.AddCondition(new Fact("C1", ">=", 0));
+            item.AddCondition(new Fact("C1", "<=", 3));
+
+            item.AddCondition(new Fact("A2", "==", 0));
+
+            item.AddCondition(new Fact("B2", ">=", 0));
+            item.AddCondition(new Fact("B2", "<=", 2));
+
+            item.AddCondition(new Fact("C2", ">=", 0));
+            item.AddCondition(new Fact("C2", "<=", 2));
+
+            item.AddCondition(new Fact("A3", ">=", 0));
+            item.AddCondition(new Fact("A3", "<=", 2));
+
+            item.AddCondition(new Fact("B3", "==", 2));
+
+            item.AddCondition(new Fact("C3", "==", 0));
+
+            item.AddFact(new Fact("Number","==", 7));
+
+            this._Productions.Add(item);
+
+            //  Eight
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 2));
+
+            item.AddCondition(new Fact("B1", "==", 2));
+
+            item.AddCondition(new Fact("C1", ">=", 0));
+            item.AddCondition(new Fact("C1", "<=", 2));
+
+            item.AddCondition(new Fact("A2", ">=", 0));
+            item.AddCondition(new Fact("A2", "<=", 2));
+
+            item.AddCondition(new Fact("B2", "==", 2));
+
+            item.AddCondition(new Fact("C2", ">=", 0));
+            item.AddCondition(new Fact("C2", "<=", 2));
+
+            item.AddCondition(new Fact("A3", ">=", 0));
+            item.AddCondition(new Fact("A3", "<=", 2));
+
+            item.AddCondition(new Fact("B3", "==", 2));
+
+            item.AddCondition(new Fact("C3", ">=", 0));
+            item.AddCondition(new Fact("C3", "<=", 2));
+
+            item.AddFact(new Fact("Number", "==", 8));
+
+            this._Productions.Add(item);
+
+            //  Nine
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 2));
+
+            item.AddCondition(new Fact("B1", "==", 2));
+
+            item.AddCondition(new Fact("C1", ">=", 0));
+            item.AddCondition(new Fact("C1", "<=", 2));
+
+            item.AddCondition(new Fact("A2", ">=", 0));
+            item.AddCondition(new Fact("A2", "<=", 1));
+
+            item.AddCondition(new Fact("B2", ">=", 1));
+            item.AddCondition(new Fact("B2", "<=", 3));
+
+            item.AddCondition(new Fact("C2", ">=", 0));
+            item.AddCondition(new Fact("C2", "<=", 3));
+
+            item.AddCondition(new Fact("A3", ">=", 0));
+            item.AddCondition(new Fact("A3", "<=", 2));
+
+            item.AddCondition(new Fact("B3", ">=", 0));
+            item.AddCondition(new Fact("B3", "<=", 2));
+
+            item.AddCondition(new Fact("C3", "==", 0));
+
+            item.AddFact(new Fact("Number", "==", 9));
+
+            this._Productions.Add(item);
+
+            //  Zero
+            item = new Production();
+            item.AddCondition(new Fact("A1", ">=", 0));
+            item.AddCondition(new Fact("A1", "<=", 3));
+
+            item.AddCondition(new Fact("B1", ">=", 2));
+            item.AddCondition(new Fact("B1", "<=", 3));
+
+            item.AddCondition(new Fact("C1", ">=", 0));
+            item.AddCondition(new Fact("C1", "<=", 3));
+
+            item.AddCondition(new Fact("A2", ">=", 0));
+            item.AddCondition(new Fact("A2", "<=", 2));
+
+            item.AddCondition(new Fact("B2", ">=", 0));
+            item.AddCondition(new Fact("B2", "<=", 2));
+
+            item.AddCondition(new Fact("C2", ">=", 0));
+            item.AddCondition(new Fact("C2", "<=", 2));
+
+            item.AddCondition(new Fact("A3", ">=", 0));
+            item.AddCondition(new Fact("A3", "<=", 3));
+
+            item.AddCondition(new Fact("B3", ">=", 2));
+            item.AddCondition(new Fact("B3", "<=", 3));
+
+            item.AddCondition(new Fact("C3", ">=", 0));
+            item.AddCondition(new Fact("C3", "<=", 2));
+
+            item.AddFact(new Fact("Number","==", 0));
 
             this._Productions.Add(item);
         }

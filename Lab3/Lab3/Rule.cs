@@ -8,6 +8,11 @@ namespace Lab3
 {
     class Rule
     {
+        public Rule()
+        {
+            _Conclusions = new List<Conclusion>();
+            _Conditions = new List<Condition>();
+        }
         public List<Condition> Conditions
         {
             set { this._Conditions = value; }

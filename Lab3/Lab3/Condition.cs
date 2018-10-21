@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-    class Conclusion : Statement
+    class Condition : Statement
     {
-
     }
 }

@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-    class Variable
+    public class Variable
     {
+        public string Id
+        {
+            set { this.id = value; }
+            get { return this.id; }
+        }
+
+        private string id;
     }
 }

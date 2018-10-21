@@ -8,6 +8,19 @@ namespace Lab3
 {
     class Rule
     {
+        public List<Condition> Conditions
+        {
+            set { this._Conditions = value; }
+            get { return this._Conditions; }
+        }
 
+        public List<Conclusion> Conclusions
+        {
+            set { this._Conclusions = value; }
+            get { return this._Conclusions; }
+        }
+
+        private List<Conclusion> _Conclusions;
+        private List<Condition> _Conditions;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab3
 {
-    class Conditions
+    class FuzzySet
     {
     }
 }

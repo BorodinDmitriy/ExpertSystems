@@ -27,7 +27,7 @@ namespace Lab3
     {
         public void RunMamdani(HeroInfo player, HeroInfo enemy)
         {
-            Mamdani.Run();
+            Mamdani.Run(player, enemy);
         }
 
         private Mamdani Mamdani = new Mamdani();

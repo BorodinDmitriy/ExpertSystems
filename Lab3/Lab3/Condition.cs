@@ -8,5 +8,9 @@ namespace Lab3
 {
     class Condition : Statement
     {
+        public Condition(string variable, string term)
+        {
+
+        }
     }
 }

@@ -8,6 +8,9 @@ namespace Lab3
 {
     class Conclusion : Statement
     {
+        public Conclusion(string variable, string term)
+        {
 
+        }
     }
 }

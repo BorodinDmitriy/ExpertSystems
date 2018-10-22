@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 namespace Lab3
 {
     public class Variable
-    {
+    {     
+        public Variable(string id)
+        {
+            this.id = id;
+        }
         public string Id
         {
             set { this.id = value; }

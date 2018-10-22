@@ -8,7 +8,7 @@ namespace Lab3
 {
     public struct HeroInfo
     {
-        public HeroInfo(int level, int atack, int defence, int atackRate, int defenceRate)
+        public HeroInfo(double level, double atack, double defence, double atackRate, double defenceRate)
         {
             this.Level = level;
             this.Atack = atack;
@@ -17,17 +17,17 @@ namespace Lab3
             this.DefenceRate = defenceRate;
         }
 
-        public int Level;
-        public int Atack;
-        public int Defence;
-        public int AtackRate;
-        public int DefenceRate;
+        public double Level;
+        public double Atack;
+        public double Defence;
+        public double AtackRate;
+        public double DefenceRate;
     }
     class Controller
     {
         public void RunMamdani(HeroInfo player, HeroInfo enemy)
         {
-            Mamdani.Run(player, enemy);
+            Mamdani.Run(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
         }
 
         private Mamdani Mamdani = new Mamdani();

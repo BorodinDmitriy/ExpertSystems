@@ -10,7 +10,8 @@ namespace Lab3
     {
         public Conclusion(string variable, FuzzySet term)
         {
-
+            this.Variable = new Variable(variable);
+            this.Term = term;
         }
     }
 }

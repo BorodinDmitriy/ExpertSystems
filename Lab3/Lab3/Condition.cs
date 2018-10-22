@@ -10,7 +10,8 @@ namespace Lab3
     {
         public Condition(string variable, FuzzySet term)
         {
-
+            this.Variable = new Variable(variable);
+            this.Term = term;
         }
     }
 }

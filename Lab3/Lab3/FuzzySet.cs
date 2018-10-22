@@ -51,14 +51,24 @@ namespace Lab3
                 return res;
             }
 
-            if (x == A.X)
+            if (x == A.X && x != B.X)
             {
                 return A.Y;
             }
 
-            if (x == B.X)
+            if (x == A.X && x == B.X)
+            {
+                return Math.Max(A.Y, B.Y);
+            }
+
+            if (x == B.X && x != C.X)
             {
                 return B.Y;
+            }
+
+            if (x == B.X && x == C.X)
+            {
+                return Math.Max(B.Y, C.Y);
             }
 
             if (x == C.X)
@@ -103,19 +113,34 @@ namespace Lab3
                 return res;
             }
 
-            if (x == A.X)
+            if (x == A.X && x != B.X)
             {
                 return A.Y;
             }
 
-            if (x == B.X)
+            if (x == A.X && x == B.X)
+            {
+                return Math.Max(A.Y, B.Y);
+            }
+
+            if (x == B.X && x != C.X)
             {
                 return B.Y;
             }
 
-            if (x == C.X)
+            if (x== B.X && x == C.X)
+            {
+                return Math.Max(B.Y, C.Y);
+            }
+
+            if (x == C.X && x != D.X)
             {
                 return C.Y;
+            }
+
+            if (x == C.X && x == D.X)
+            {
+                return Math.Max(C.Y, D.Y);
             }
 
             if (x == D.X)

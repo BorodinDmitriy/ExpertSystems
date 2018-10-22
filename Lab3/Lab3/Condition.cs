@@ -8,7 +8,7 @@ namespace Lab3
 {
     class Condition : Statement
     {
-        public Condition(string variable, string term)
+        public Condition(string variable, FuzzySet term)
         {
 
         }

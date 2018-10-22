@@ -38,134 +38,153 @@ namespace Lab3
         {
             //  AR - Atack Rate
             //  DR - Defence Rate
-            //  D - Damage ["No","Low", "Minor", "Average", "High"]
+            //  D - Damage ["No","Low", "Minor", "Average", High]
             Rule temp = new Rule();
 
-            //  if ("AR" is "Missing" and "DR" is "Missing") then ("D" is "Low")
-            temp.Conditions.Add(new Condition("AR", "Missing"));
-            temp.Conditions.Add(new Condition("DR", "Missing"));
+            //  "AR" FussySet
+            TriangleSet MissingAR = new TriangleSet(new Point(0, 0), new Point(0, 1), new Point(1, 0));
+            TrapezeSet BasicAR = new TrapezeSet(new Point(0, 0), new Point(1, 1), new Point(30, 1), new Point(32, 0));
+            TrapezeSet AdvanceAR = new TrapezeSet(new Point(31, 0), new Point(32, 1), new Point(71, 1), new Point(73, 0));
+            TrapezeSet ExpertAR = new TrapezeSet(new Point(72, 0), new Point(74, 1), new Point(100, 1), new Point(100, 0));
 
-            temp.Conclusions.Add(new Conclusion("D", "Low"));
+            //  "DR" FuzzySet
+            TriangleSet MissingDR = new TriangleSet(new Point(0, 0), new Point(0, 1), new Point(3, 0));
+            TrapezeSet BasicDR = new TrapezeSet(new Point(1, 0), new Point(4, 1), new Point(32, 1), new Point(36, 0));
+            TrapezeSet AdvanceDR = new TrapezeSet(new Point(34, 0), new Point(38, 1), new Point(80, 1), new Point(85, 0));
+            TrapezeSet ExpertDR = new TrapezeSet(new Point(75, 0), new Point(90, 1), new Point(100, 1), new Point(100, 0));
+
+            //  "D" FuzzySet
+            TriangleSet No = new TriangleSet(new Point(0, 0), new Point(0, 1), new Point(1, 0));
+            TriangleSet Low = new TriangleSet(new Point(0, 0), new Point(2, 1), new Point(15, 0));
+            TrapezeSet Minor = new TrapezeSet(new Point(10, 0), new Point(17, 1), new Point(38, 1), new Point(50, 0));
+            TrapezeSet Average = new TrapezeSet(new Point(40, 0), new Point(49, 1), new Point(75, 1), new Point(80, 0));
+            TrapezeSet High = new TrapezeSet(new Point(78, 0), new Point(89, 1), new Point(100, 1), new Point(100, 0));
+
+            //  if ("AR" is "Missing" and "DR" is "Missing") then ("D" is "Low")
+            temp.Conditions.Add(new Condition("AR", MissingAR));
+            temp.Conditions.Add(new Condition("DR", MissingDR));
+
+            temp.Conclusions.Add(new Conclusion("D", Low));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Basic" and "DR" is "Missing") then ("D" is "Minor")
-            temp.Conditions.Add(new Condition("AR", "Basic"));
-            temp.Conditions.Add(new Condition("DR", "Missing"));
+            temp.Conditions.Add(new Condition("AR", BasicAR));
+            temp.Conditions.Add(new Condition("DR", MissingDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "Minor"));
+            temp.Conclusions.Add(new Conclusion("D", Minor));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Advance" and "DR" is "Missing") then ("D" is "Average")
-            temp.Conditions.Add(new Condition("AR", "Advance"));
-            temp.Conditions.Add(new Condition("DR", "Missing"));
+            temp.Conditions.Add(new Condition("AR", AdvanceAR));
+            temp.Conditions.Add(new Condition("DR", MissingDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "Average"));
+            temp.Conclusions.Add(new Conclusion("D", Average));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Expert" and "DR" is "Missing") then ("D" is "High")
-            temp.Conditions.Add(new Condition("AR", "Expert"));
-            temp.Conditions.Add(new Condition("DR", "Missing"));
+            temp.Conditions.Add(new Condition("AR", ExpertAR));
+            temp.Conditions.Add(new Condition("DR", MissingDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "High"));
+            temp.Conclusions.Add(new Conclusion("D", High));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Missing" and "DR" is "Basic") then ("D" is "No")
-            temp.Conditions.Add(new Condition("AR", "Missing"));
-            temp.Conditions.Add(new Condition("DR", "Basic"));
+            temp.Conditions.Add(new Condition("AR", MissingAR));
+            temp.Conditions.Add(new Condition("DR", BasicDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "No"));
+            temp.Conclusions.Add(new Conclusion("D", No));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Basic" and "DR" is "Basic") then ("D" is "Low")
-            temp.Conditions.Add(new Condition("AR", "Basic"));
-            temp.Conditions.Add(new Condition("DR", "Basic"));
+            temp.Conditions.Add(new Condition("AR", BasicAR));
+            temp.Conditions.Add(new Condition("DR", BasicDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "Low"));
+            temp.Conclusions.Add(new Conclusion("D", Low));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Advance" and "DR" is "Basic") then ("D" is "Minor")
-            temp.Conditions.Add(new Condition("AR", "Advance"));
-            temp.Conditions.Add(new Condition("DR", "Basic"));
+            temp.Conditions.Add(new Condition("AR", AdvanceAR));
+            temp.Conditions.Add(new Condition("DR", BasicDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "Minor"));
+            temp.Conclusions.Add(new Conclusion("D", Minor));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Expert" and "DR" is "Basic") then ("D" is "Average")
-            temp.Conditions.Add(new Condition("AR", "Expert"));
-            temp.Conditions.Add(new Condition("DR", "Basic"));
+            temp.Conditions.Add(new Condition("AR", ExpertAR));
+            temp.Conditions.Add(new Condition("DR", BasicDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "Average"));
+            temp.Conclusions.Add(new Conclusion("D", Average));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Missing" and "DR" is "Advance") then ("D" is "No")
-            temp.Conditions.Add(new Condition("AR", "Missing"));
-            temp.Conditions.Add(new Condition("DR", "Advance"));
+            temp.Conditions.Add(new Condition("AR", MissingAR));
+            temp.Conditions.Add(new Condition("DR", AdvanceDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "No"));
+            temp.Conclusions.Add(new Conclusion("D", No));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Basic" and "DR" is "Advance") then ("D" is "No")
-            temp.Conditions.Add(new Condition("AR", "Basic"));
-            temp.Conditions.Add(new Condition("DR", "Advance"));
+            temp.Conditions.Add(new Condition("AR", BasicAR));
+            temp.Conditions.Add(new Condition("DR", AdvanceDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "No"));
+            temp.Conclusions.Add(new Conclusion("D", No));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Advance" and "DR" is "Advance") then ("D" is "Low")
-            temp.Conditions.Add(new Condition("AR", "Advance"));
-            temp.Conditions.Add(new Condition("DR", "Advance"));
+            temp.Conditions.Add(new Condition("AR", AdvanceAR));
+            temp.Conditions.Add(new Condition("DR", AdvanceDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "Low"));
+            temp.Conclusions.Add(new Conclusion("D", Low));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Expert" and "DR" is "Advance") then ("D" is "Minor")
-            temp.Conditions.Add(new Condition("AR", "Expert"));
-            temp.Conditions.Add(new Condition("DR", "Advance"));
+            temp.Conditions.Add(new Condition("AR", ExpertAR));
+            temp.Conditions.Add(new Condition("DR", AdvanceDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "Minor"));
+            temp.Conclusions.Add(new Conclusion("D", Minor));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Missing" and "DR" is "Expert") then ("D" is "No")
-            temp.Conditions.Add(new Condition("AR", "Missing"));
-            temp.Conditions.Add(new Condition("DR", "Expert"));
+            temp.Conditions.Add(new Condition("AR", MissingAR));
+            temp.Conditions.Add(new Condition("DR", ExpertDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "No"));
+            temp.Conclusions.Add(new Conclusion("D", No));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Basic" and "DR" is "Expert") then ("D" is "No")
-            temp.Conditions.Add(new Condition("AR", "Basic"));
-            temp.Conditions.Add(new Condition("DR", "Expert"));
+            temp.Conditions.Add(new Condition("AR", BasicAR));
+            temp.Conditions.Add(new Condition("DR", ExpertDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "No"));
+            temp.Conclusions.Add(new Conclusion("D", No));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Advance" and "DR" is "Expert") then ("D" is "No")
-            temp.Conditions.Add(new Condition("AR", "Advance"));
-            temp.Conditions.Add(new Condition("DR", "Expert"));
+            temp.Conditions.Add(new Condition("AR", AdvanceAR));
+            temp.Conditions.Add(new Condition("DR", ExpertDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "No"));
+            temp.Conclusions.Add(new Conclusion("D", No));
             this.Rules.Add(temp);
             temp = new Rule();
 
             //  if ("AR" is "Expert" and "DR" is "Expert") then ("D" is "Low")
-            temp.Conditions.Add(new Condition("AR", "Expert"));
-            temp.Conditions.Add(new Condition("DR", "Expert"));
+            temp.Conditions.Add(new Condition("AR", ExpertAR));
+            temp.Conditions.Add(new Condition("DR", ExpertDR));
 
-            temp.Conclusions.Add(new Conclusion("D", "Low"));
+            temp.Conclusions.Add(new Conclusion("D", Low));
             this.Rules.Add(temp);
             temp = new Rule();
         }

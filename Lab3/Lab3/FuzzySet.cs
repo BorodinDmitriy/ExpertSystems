@@ -173,4 +173,55 @@ namespace Lab3
         private Point C;
         private Point D;
     }
+
+    public class ActiveFuzzySet: FuzzySet
+    {
+        public ActiveFuzzySet(double truthDegree, FuzzySet parent)
+        {
+            this._TruthDegree = truthDegree;
+            this._linkOnTerm = parent;
+        }
+
+        public double TruthDegree
+        {
+            set { this._TruthDegree = value; }
+            get { return this._TruthDegree; }
+        }
+
+        public FuzzySet Term
+        {
+            set { this._linkOnTerm = value; }
+            get { return this._linkOnTerm; }
+        }
+
+        public override double GetValue(double x)
+        {
+            return Math.Min(this._TruthDegree, this._linkOnTerm.GetValue(x));
+        }
+
+        private double _TruthDegree;
+        private FuzzySet _linkOnTerm;
+
+    }
+
+    public class UnionFuzzySet: FuzzySet
+    {
+        private List<FuzzySet> union = new List<FuzzySet>();
+
+        public List<FuzzySet> Union
+        {
+            set { this.union = value; }
+            get { return this.union; }
+        }
+
+        public override double GetValue(double x)
+        {
+            double res = 0;
+            for (int I = 0; I < this.union.Count; I++)
+            {
+                res = Math.Max(res, union[I].GetValue(x));
+            }
+            return res;
+        }
+    }
 }

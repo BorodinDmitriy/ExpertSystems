@@ -13,5 +13,20 @@ namespace Lab3
             this.Variable = new Variable(variable);
             this.Term = term;
         }
+
+        public Conclusion(string variable, FuzzySet term, double weight)
+        {
+            this.Variable = new Variable(variable);
+            this.Term = term;
+            this._Weight = weight;
+        }
+
+        public double Weight
+        {
+            set { this._Weight = value; }
+            get { return this._Weight; }
+        }
+
+        private double _Weight = 1;
     }
 }

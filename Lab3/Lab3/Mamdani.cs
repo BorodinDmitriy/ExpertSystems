@@ -14,7 +14,7 @@ namespace Lab3
             InitListRules();
         }
 
-        public void Run(double HAR, double HDR, double EAR, double EDR)
+        public double Run(double HAR, double HDR, double EAR, double EDR)
         {
             List<double> heroAR = new List<double>();
             List<double> heroDR = new List<double>();
@@ -24,9 +24,19 @@ namespace Lab3
             List<double> enemyDR = new List<double>();
             this.Fuzzification(EAR, ref enemyAR, EDR, ref enemyDR);
 
-            this.Aggregation();
+            List<double> atackPlayer = this.Aggregation(heroAR, enemyDR);
+            List<double> contatackEnemy = this.Aggregation(enemyAR, heroDR);
 
-            return;
+            List<ActiveFuzzySet> activePlayerSets = this.Activate(atackPlayer);
+            List<ActiveFuzzySet> activeEnemySets = this.Activate(contatackEnemy);
+
+            List<UnionFuzzySet> unionPlayerSets = this.Accumulation(activePlayerSets);
+            List<UnionFuzzySet> unionEnemySets = this.Accumulation(activeEnemySets);
+
+            double playerDamage = this.DefuzzificationDamage(unionPlayerSets);
+            double enemyDamage = this.DefuzzificationDamage(unionEnemySets);
+
+            return playerDamage;
         }
 
         private List<Rule> Rules;
@@ -47,9 +57,113 @@ namespace Lab3
             return;
         }
 
-        private void Aggregation()
+        private List<double> Aggregation(List<double> atackDirects, List<double> defenceDirects)
         {
+            List<double> result = new List<double>();
+            for (int I = 0; I < this.Rules.Count; I++)
+            {
+                double currentValue = Double.MaxValue;
+                Rule currentRule = this.Rules[I];
+                for (int J = 0; J < currentRule.Conditions.Count; J++)
+                {
+                    if (currentRule.Conditions[J].Variable.Id == "AR")
+                    {
+                        int index;
+                        if (currentRule.Conditions[J].Term == MissingAR)
+                        {
+                            index = 0;
+                        }
+                        else if (currentRule.Conditions[J].Term == BasicAR)
+                        {
+                            index = 1;
+                        }
+                        else if (currentRule.Conditions[J].Term == AdvanceAR)
+                        {
+                            index = 2;
+                        }
+                        else if (currentRule.Conditions[J].Term == ExpertAR)
+                        {
+                            index = 3;
+                        }
+                        else
+                        {
+                            throw new Exception("Not exist current term");
+                        }
 
+                        currentValue = Math.Min(currentValue, atackDirects[index]);
+                    } 
+                    else
+                    {
+                        int index;
+                        if (currentRule.Conditions[J].Term == MissingDR)
+                        {
+                            index = 0;
+                        }
+                        else if (currentRule.Conditions[J].Term == BasicDR)
+                        {
+                            index = 1;
+                        }
+                        else if (currentRule.Conditions[J].Term == AdvanceDR)
+                        {
+                            index = 2;
+                        }
+                        else if (currentRule.Conditions[J].Term == ExpertDR)
+                        {
+                            index = 3;
+                        }
+                        else
+                        {
+                            throw new Exception("Not exist current term");
+                        }
+
+                        currentValue = Math.Min(currentValue, defenceDirects[index]);
+                    }
+                }
+                result.Add(currentValue);
+
+            }
+            return result;
+        }
+
+        private List<ActiveFuzzySet> Activate(List<double> c)
+        {
+            List<ActiveFuzzySet> result = new List<ActiveFuzzySet>();
+            for (int I = 0; I < this.Rules.Count; I++)
+            {
+                Rule currentRule = this.Rules[I];
+                double x = currentRule.Conclusions[0].Weight * c[I];
+                result.Add(new ActiveFuzzySet(x, currentRule.Conclusions[0].Term));
+            }
+
+            return result;
+        }
+
+        private List<UnionFuzzySet> Accumulation(List<ActiveFuzzySet> activated)
+        {
+            List<UnionFuzzySet> result = new List<UnionFuzzySet>();
+            UnionFuzzySet damage = new UnionFuzzySet();
+            for (int I = 0; I < Rules.Count; I++)
+            {
+                Rule currentRule = Rules[I];
+                if (currentRule.Conclusions[0].Variable.Id == "D")
+                {
+                    damage.Union.Add(activated[I]);
+                }               
+            }
+            result.Add(damage);
+            return result;
+        }
+
+        private double DefuzzificationDamage(List<UnionFuzzySet> unionSets)
+        {
+            double res = 0;
+            double min = 0;
+            double max = 1000;
+            int countIteration = 500000;
+            double numerator = MathHelper.Integral((x) => { return x * unionSets[0].GetValue(x); }, min, max, countIteration);
+            double denominator = MathHelper.Integral(unionSets[0].GetValue, min, max, countIteration);
+
+            return res = numerator / denominator;
         }
 
 

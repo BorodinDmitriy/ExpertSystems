@@ -14,7 +14,7 @@ namespace Lab3
         {
             this.Variable = new Variable(variable);
             this.Term = term;
-            this.Val = weightAR * AR + weightDR * DR;
+            this.Val = weightAR * AR - weightDR * DR;
         }
 
         public override double getDamage() {

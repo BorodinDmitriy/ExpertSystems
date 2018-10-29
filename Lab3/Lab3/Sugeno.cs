@@ -108,7 +108,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", BasicAR));
             temp.Conditions.Add(new Condition("DR", MissingDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", Minor, 0.3, HAR, 0, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", Minor, 1.75, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -116,7 +116,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", AdvanceAR));
             temp.Conditions.Add(new Condition("DR", MissingDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", Average, 0.5, HAR, 0, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", Average, 1.22, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -124,7 +124,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", ExpertAR));
             temp.Conditions.Add(new Condition("DR", MissingDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", High, 0.7, HAR, 0, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", High, 1.197, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -132,7 +132,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", MissingAR));
             temp.Conditions.Add(new Condition("DR", BasicDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0.2, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -140,7 +140,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", BasicAR));
             temp.Conditions.Add(new Condition("DR", BasicDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", Low, 0.3, HAR, 0.2, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", Low, 1, HAR, 0.5, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -148,7 +148,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", AdvanceAR));
             temp.Conditions.Add(new Condition("DR", BasicDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", Minor, 0.5, HAR, 0.2, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", Minor, 1.2, HAR, 0.5, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -156,7 +156,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", ExpertAR));
             temp.Conditions.Add(new Condition("DR", BasicDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", Average, 0.7, HAR, 0.2, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", Average, 1.2, HAR, 0.4, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -164,7 +164,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", MissingAR));
             temp.Conditions.Add(new Condition("DR", AdvanceDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0.4, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -172,7 +172,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", BasicAR));
             temp.Conditions.Add(new Condition("DR", AdvanceDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", No, 0.3, HAR, 0.4, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -180,7 +180,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", AdvanceAR));
             temp.Conditions.Add(new Condition("DR", AdvanceDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", Low, 0.5, HAR, 0.4, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", Low, 1, HAR, 0.8, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -188,7 +188,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", ExpertAR));
             temp.Conditions.Add(new Condition("DR", AdvanceDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", Minor, 0.7, HAR, 0.4, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", Minor, 1.2, HAR, 0.8, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -196,7 +196,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", MissingAR));
             temp.Conditions.Add(new Condition("DR", ExpertDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0.6, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -204,7 +204,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", BasicAR));
             temp.Conditions.Add(new Condition("DR", ExpertDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", No, 0.3, HAR, 0.6, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -212,7 +212,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", AdvanceAR));
             temp.Conditions.Add(new Condition("DR", ExpertDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", No, 0.5, HAR, 0.6, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", No, 0, HAR, 0, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
 
@@ -220,7 +220,7 @@ namespace Lab3
             temp.Conditions.Add(new Condition("AR", ExpertAR));
             temp.Conditions.Add(new Condition("DR", ExpertDR));
 
-            temp.Conclusions.Add(new SugenoConclusion("D", Low, 0.7, HAR, 0.6, EDR));
+            temp.Conclusions.Add(new SugenoConclusion("D", Low, 1.3, HAR, 1, EDR));
             this.Rules.Add(temp);
             temp = new Rule();
         }

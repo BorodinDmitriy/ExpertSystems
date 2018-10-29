@@ -25,14 +25,14 @@ namespace Lab3
     }
     class Controller
     {
-        public void RunMamdani(HeroInfo player, HeroInfo enemy)
+        public List<double> RunMamdani(HeroInfo player, HeroInfo enemy)
         {
-            Mamdani.Run(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
+            return Mamdani.Run(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
         }
 
-        public void RunSugeno(HeroInfo player, HeroInfo enemy)
+        public List<double> RunSugeno(HeroInfo player, HeroInfo enemy)
         {
-            Sugeno.Run(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
+            return Sugeno.Run(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
         }
 
         private Mamdani Mamdani = new Mamdani();

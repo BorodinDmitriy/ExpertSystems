@@ -34,7 +34,7 @@ namespace Lab3
             this.Rules = new List<Rule>();
         }
 
-        public double Run(double HAR, double HDR, double EAR, double EDR)
+        public List<double> Run(double HAR, double HDR, double EAR, double EDR)
         {
             InitListRules(HAR, EDR);
 
@@ -81,7 +81,12 @@ namespace Lab3
             }
             enemyDamage *= truthDegreeEnemySum;
 
-            return resultDamage;
+            List<double> resultSet = new List<double>();
+
+            resultSet.Add(resultDamage);
+            resultSet.Add(enemyDamage);
+
+            return resultSet; 
         }
 
         private void InitListRules(double HAR, double EDR)

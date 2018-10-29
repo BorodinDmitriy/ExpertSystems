@@ -14,7 +14,7 @@ namespace Lab3
             InitListRules();
         }
 
-        public double Run(double HAR, double HDR, double EAR, double EDR)
+        public List<double> Run(double HAR, double HDR, double EAR, double EDR)
         {
             List<double> heroAR = new List<double>();
             List<double> heroDR = new List<double>();
@@ -33,10 +33,14 @@ namespace Lab3
             List<UnionFuzzySet> unionPlayerSets = this.Accumulation(activePlayerSets);
             List<UnionFuzzySet> unionEnemySets = this.Accumulation(activeEnemySets);
 
+            List<double> resultSet = new List<double>();
             double playerDamage = this.DefuzzificationDamage(unionPlayerSets);
             double enemyDamage = this.DefuzzificationDamage(unionEnemySets);
 
-            return playerDamage;
+            resultSet.Add(playerDamage);
+            resultSet.Add(enemyDamage);
+
+            return resultSet; 
         }
 
         private List<Rule> Rules;

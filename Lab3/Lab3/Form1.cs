@@ -16,6 +16,7 @@ namespace Lab3
         {
             InitializeComponent();
             FuzzyController.RunMamdani(fakePlayer, fakeEnemy);
+            FuzzyController.RunSugeno(fakePlayer, fakeEnemy);
         }
 
         private Controller FuzzyController = new Controller();

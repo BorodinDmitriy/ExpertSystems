@@ -30,6 +30,12 @@ namespace Lab3
             Mamdani.Run(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
         }
 
+        public void RunSugeno(HeroInfo player, HeroInfo enemy)
+        {
+            Sugeno.Run(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
+        }
+
         private Mamdani Mamdani = new Mamdani();
+        private Sugeno Sugeno = new Sugeno();
     }
 }

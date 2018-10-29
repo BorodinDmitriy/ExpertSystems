@@ -8,6 +8,9 @@ namespace Lab3
 {
     class Conclusion : Statement
     {
+        public Conclusion()
+        {
+        }
         public Conclusion(string variable, FuzzySet term)
         {
             this.Variable = new Variable(variable);
@@ -25,6 +28,11 @@ namespace Lab3
         {
             set { this._Weight = value; }
             get { return this._Weight; }
+        }
+
+        public virtual double getDamage()
+        {
+            return 0;
         }
 
         private double _Weight = 1;

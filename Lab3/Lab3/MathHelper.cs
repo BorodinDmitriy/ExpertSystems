@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MathNet.Numerics;
+using MathNet.Numerics.Integration;
 
 namespace Lab3
 {
@@ -11,20 +13,7 @@ namespace Lab3
     {
         public static double Integral(SubIntegral func, double min, double max, int count)
         {
-            double h = (max - min) / count;
-            double res = 0;
-
-            double x = min + h;
-
-            while (x < max)
-            {
-                res += 4 * func(x);
-                x += h;
-                res += 2 * func(x);
-                x += h;
-            }
-
-            res = (h / 3) * (res + func(min) - func(max));
+            double res = GaussLegendreRule.Integrate(x => { return func(x); }, min, max, count);
             return res;
         }
     }

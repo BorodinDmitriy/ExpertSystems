@@ -32,10 +32,10 @@ namespace Lab3
 
         public List<double> RunSugeno(HeroInfo player, HeroInfo enemy)
         {
+            Sugeno Sugeno = new Sugeno(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
             return Sugeno.Run(player.AtackRate, player.DefenceRate, enemy.AtackRate, enemy.DefenceRate);
         }
 
         private Mamdani Mamdani = new Mamdani();
-        private Sugeno Sugeno = new Sugeno();
     }
 }

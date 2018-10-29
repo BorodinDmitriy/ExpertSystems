@@ -29,14 +29,14 @@ namespace Lab3
         private TrapezeSet Average = new TrapezeSet(new Point(40, 0), new Point(49, 1), new Point(75, 1), new Point(80, 0));
         private TrapezeSet High = new TrapezeSet(new Point(78, 0), new Point(89, 1), new Point(100, 1), new Point(100, 0));
 
-         public Sugeno()
+        public Sugeno(double HAR, double HDR, double EAR, double EDR)
         {
             this.Rules = new List<Rule>();
+            InitListRules(HAR, EDR);
         }
 
         public List<double> Run(double HAR, double HDR, double EAR, double EDR)
         {
-            InitListRules(HAR, EDR);
 
             List<double> heroAR = new List<double>();
             List<double> heroDR = new List<double>();

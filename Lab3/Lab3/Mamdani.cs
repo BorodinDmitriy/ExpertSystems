@@ -162,8 +162,8 @@ namespace Lab3
         {
             double res = 0;
             double min = 0;
-            double max = 1000;
-            int countIteration = 500000;
+            double max = 100;
+            int countIteration = 1000;
             double numerator = MathHelper.Integral((x) => { return x * unionSets[0].GetValue(x); }, min, max, countIteration);
             double denominator = MathHelper.Integral(unionSets[0].GetValue, min, max, countIteration);
 

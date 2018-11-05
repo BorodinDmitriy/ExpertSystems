@@ -32,6 +32,14 @@ namespace Lab4
             return;
         }
 
+        public void Clear()
+        {
+            this.vectorPoint.Clear();
+            this.startCentroid.Clear();
+            this.matrix.Clear();
+            initClustering();
+        }
+
         private void initMatrix()
         {
             for (int I = 0; I < this.matrix.Count; I++)

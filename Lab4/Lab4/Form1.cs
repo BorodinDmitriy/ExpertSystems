@@ -214,7 +214,7 @@ namespace Lab4
                         p.Color = Color.Blue;
                         break;
                     case 3:
-                        p.Color = Color.Yellow;
+                        p.Color = Color.Brown;
                         break;
                     case 4:
                         p.Color = Color.Black;
@@ -233,15 +233,38 @@ namespace Lab4
             Test();
             List<List<double>> matrix = controller.Calculate();
             List<Point> points = controller.getVectorPoint();
-            double K = 0;
-            K = matrix[0][0];
             DrawGraph(g, p, matrix, points);
            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //g.Clear(Form1.DefaultBackColor);
+            double AR = Double.Parse(numericUpDown1.Value.ToString());
+            double DR = Double.Parse(numericUpDown2.Value.ToString());
+            Point tmp = new Point(AR, DR);
+            controller.Add(tmp);
+            listBox1.Items.Add("AR = " + tmp.AR.ToString() + "; DR = " + tmp.DR.ToString());
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            numericUpDown1.Increment = 0.1m;
+            numericUpDown2.Increment = 0.1m;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            List<List<double>> matrix = controller.Calculate();
+            List<Point> points = controller.getVectorPoint();
+            DrawGraph(g, p, matrix, points);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
             g.Clear(Form1.DefaultBackColor);
+            controller.Clear();
         }
     }
 }

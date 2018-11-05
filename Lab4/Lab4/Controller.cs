@@ -73,6 +73,11 @@ namespace Lab4
             return matrix;
         }
 
+        public List<Point> getVectorPoint()
+        {
+            return vectorPoint;
+        }
+
         //public double MinFunc()
         //{
         //    double res = 0;

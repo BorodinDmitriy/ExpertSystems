@@ -82,7 +82,7 @@ namespace Lab4
                         top = Distance(this.vectorPoint[K], this.startCentroid[I]);
                         bottom = Distance(this.vectorPoint[K], this.startCentroid[J]);
                         if (bottom != 0)
-                            diveder += Math.Pow((top / bottom), (2.0 / (this.vectorPoint.Count - 1)));
+                            diveder += Math.Pow((top / bottom), (2.0 / (M - 1)));
                     }
 
                     if (diveder != 0)
@@ -111,9 +111,9 @@ namespace Lab4
                 double del = 0;
                 for (int K = 0; K < this.vectorPoint.Count; K++)
                 {
-                    x += (this.matrix[K][I] * this.vectorPoint[K].AR);
-                    y += (this.matrix[K][I] * this.vectorPoint[K].DR);
-                    del += this.matrix[K][I];
+                    x += (Math.Pow(this.matrix[K][I], M) * this.vectorPoint[K].AR);
+                    y += (Math.Pow(this.matrix[K][I], M) * this.vectorPoint[K].DR);
+                    del += Math.Pow(this.matrix[K][I], M);
                 }
 
 

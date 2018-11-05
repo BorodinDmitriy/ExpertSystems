@@ -29,7 +29,7 @@ namespace Lab4
             //  High
             for (int I = 76; I <= 100; I++)
             {
-                for (int J = 0; J <= 2; J++)
+                for (int J = 0; J <= 1; J++)
                 {
                     controller.Add(new Point(I, J));
                 }
@@ -37,17 +37,17 @@ namespace Lab4
             
 
             //  Average
-            for (int I = 32; I <= 71; I++)
+            for (int I = 32; I <= 72; I++)
             {
-                for (int J = 0; J <= 2; J++)
+                for (int J = 0; J <= 1 * (I - 31); J++)
                 {
                     controller.Add(new Point(I, J));
                 }
             }
 
-            for (int I = 71; I <= 100; I++)
+            for (int I = 72; I <= 100; I++)
             {
-                for(int J = 3; J <= 32; J++)
+                for(int J = 5; J <= 32; J++)
                 {
                     controller.Add(new Point(I, J));
                 }

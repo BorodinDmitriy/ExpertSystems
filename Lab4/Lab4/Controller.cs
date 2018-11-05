@@ -28,11 +28,30 @@ namespace Lab4
             {
                 this.matrix[this.matrix.Count - 1].Add(0);
             }
+            
             return;
+        }
+
+        private void initMatrix()
+        {
+            for (int I = 0; I < this.matrix.Count; I++)
+            {
+                for (int J = 0; J < this.matrix[I].Count; J++)
+                {
+                    matrix[I][J] = 0;
+                }
+            }
+
+            matrix[0][0] = 1;
+            matrix[1][1] = 1;
+            matrix[2][2] = 1;
+            matrix[3][3] = 1;
+            matrix[4][4] = 1;
         }
 
         public List<List<double>> Calculate()
         {
+            initMatrix();
             bool state = true;
             List<double> distance = new List<double>(this.C);
             double prev = FindMaxU();
@@ -70,9 +89,9 @@ namespace Lab4
 
         private void RefreshMatrix()
         {
-            for (int I = 0; I < this.C; I++)
+            for (int K = 0; K < this.vectorPoint.Count; K++) 
             {
-                for (int K = 0; K < this.vectorPoint.Count; K++)
+                for (int I = 0; I < this.C; I++)
                 {
                     double diveder = 0;
                     double top = 0;
@@ -88,7 +107,7 @@ namespace Lab4
                     if (diveder != 0)
                         matrix[K][I] = 1 / diveder;
                     else
-                        matrix[K][I] = 0;
+                        matrix[K][I] = 1;
                 }
             }
         }
@@ -143,24 +162,24 @@ namespace Lab4
         private void initClustering()
         {
             //  No
-            this.startCentroid.Add(new Point(0.5, 1));
-            this.vectorPoint.Add(new Point(0.5, 1.5));
+            this.startCentroid.Add(new Point(20, 80));
+            this.vectorPoint.Add(new Point(20, 80));
             this.matrix.Add(new List<double>(C));
             //  Low
-            this.startCentroid.Add(new Point(15, 13));
-            this.vectorPoint.Add(new Point(15, 13));
+            this.startCentroid.Add(new Point(45, 60));
+            this.vectorPoint.Add(new Point(45, 60));
             this.matrix.Add(new List<double>(C));
             //  Minor
-            this.startCentroid.Add(new Point(55, 34));
-            this.vectorPoint.Add(new Point(55, 34));
+            this.startCentroid.Add(new Point(55, 35));
+            this.vectorPoint.Add(new Point(55, 35));
             this.matrix.Add(new List<double>(C));
             //  Average
-            this.startCentroid.Add(new Point(65, 40));
-            this.vectorPoint.Add(new Point(65, 40));
+            this.startCentroid.Add(new Point(65, 15));
+            this.vectorPoint.Add(new Point(65, 15));
             this.matrix.Add(new List<double>(C));
             //  High
-            this.startCentroid.Add(new Point(85, 1.5));
-            this.vectorPoint.Add(new Point(85, 1.5));
+            this.startCentroid.Add(new Point(85, 0));
+            this.vectorPoint.Add(new Point(85, 0));
             this.matrix.Add(new List<double>(C));
 
             for (int I = 0; I < this.C; I++)

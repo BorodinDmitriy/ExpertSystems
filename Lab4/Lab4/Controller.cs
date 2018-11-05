@@ -25,14 +25,14 @@ namespace Lab4
             this.matrix.Add(new List<double>(this.C));
             for (int I = 0; I < this.C; I++)
             {
-                this.matrix[this.matrix.Count - 1][I] = 0;
+                this.matrix[this.matrix.Count - 1].Add(0);
             }
             return;
         }
 
         public List<List<double>> Calculate()
         {
-            bool state = false;
+            bool state = true;
             List<double> distance = new List<double>(this.C);
             double prev = FindMaxU();
             double current = prev;
@@ -45,7 +45,7 @@ namespace Lab4
                 current = FindMaxU();
                 if (Math.Abs(current - prev) < this.Eps)
                 {
-                    state = true;
+                    state = false;
                 }
             }
 
@@ -60,12 +60,20 @@ namespace Lab4
                 for (int K = 0; K < this.vectorPoint.Count; K++)
                 {
                     double diveder = 0;
+                    double top = 0;
+                    double bottom = 0;
                     for (int J = 0; J < this.C; J++)
                     {
-                        diveder += Math.Pow((Distance(this.vectorPoint[K], this.startCentroid[I]) / Distance(this.vectorPoint[K], this.startCentroid[J])), (2 / (this.vectorPoint.Count - 1)));
+                        top = Distance(this.vectorPoint[K], this.startCentroid[I]);
+                        bottom = Distance(this.vectorPoint[K], this.startCentroid[J]);
+                        if (bottom != 0)
+                            diveder += Math.Pow((top / bottom), (2.0 / (this.vectorPoint.Count - 1)));
                     }
 
-                    matrix[K][I] = 1 / diveder;
+                    if (diveder != 0)
+                        matrix[K][I] = 1 / diveder;
+                    else
+                        matrix[K][I] = 0;
                 }
             }
         }
@@ -108,7 +116,7 @@ namespace Lab4
             {
                 for (int J = 0; J < this.C; J++)
                 {
-                    if (res > matrix[K][J])
+                    if (res < matrix[K][J])
                     {
                         res = matrix[K][J];
                     }
@@ -123,34 +131,31 @@ namespace Lab4
             this.startCentroid.Add(new Point(0.5, 1.5));
             this.vectorPoint.Add(new Point(0.5, 1.5));
             this.matrix.Add(new List<double>(C));
-            this.matrix[0][0] = 1;
             //  Low
             this.startCentroid.Add(new Point(15, 13));
-            this.vectorPoint.Add(new Point(0.5, 1.5));
+            this.vectorPoint.Add(new Point(15, 13));
             this.matrix.Add(new List<double>(C));
-            this.matrix[1][1] = 1;
             //  Minor
             this.startCentroid.Add(new Point(55, 34));
             this.vectorPoint.Add(new Point(55, 34));
             this.matrix.Add(new List<double>(C));
-            this.matrix[2][2] = 1;
             //  Average
             this.startCentroid.Add(new Point(65, 40));
             this.vectorPoint.Add(new Point(65, 40));
             this.matrix.Add(new List<double>(C));
-            this.matrix[3][3] = 1;
             //  High
             this.startCentroid.Add(new Point(85, 1.5));
             this.vectorPoint.Add(new Point(85, 1.5));
             this.matrix.Add(new List<double>(C));
-            this.matrix[4][4] = 1;
 
             for (int I = 0; I < this.C; I++)
             {
                 for (int J = 0; J < this.C; J++)
                 {
                     if (I != J)
-                        this.matrix[I][J] = 0;
+                        this.matrix[I].Add(0);
+                    else
+                        this.matrix[I].Add(1);
                 }
             }
             return;

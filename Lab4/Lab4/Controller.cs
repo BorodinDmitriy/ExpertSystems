@@ -10,6 +10,7 @@ namespace Lab4
     {
         private int C = 5;
         private double Eps = 10e-3;
+        private double M = 2;
         private List<Point> startCentroid = new List<Point>();
         private List<Point> vectorPoint = new List<Point>();
         private List<List<double>> matrix = new List<List<double>>();
@@ -52,6 +53,20 @@ namespace Lab4
             
             return matrix;
         }
+
+        //public double MinFunc()
+        //{
+        //    double res = 0;
+        //    for (int I = 0; I < this.C; I++)
+        //    {
+        //        for (int K = 0; K < this.vectorPoint.Count; K++)
+        //        {
+        //            res += Math.Pow(matrix[I][K], M) * Distance(this.vectorPoint[I], this.startCentroid[K]);
+        //        }
+        //    }
+
+        //    return res;
+        //}
 
         private void RefreshMatrix()
         {
@@ -128,7 +143,7 @@ namespace Lab4
         private void initClustering()
         {
             //  No
-            this.startCentroid.Add(new Point(0.5, 1.5));
+            this.startCentroid.Add(new Point(0.5, 1));
             this.vectorPoint.Add(new Point(0.5, 1.5));
             this.matrix.Add(new List<double>(C));
             //  Low

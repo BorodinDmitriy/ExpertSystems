@@ -15,6 +15,9 @@ namespace Lab4
         public Form1()
         {
             InitializeComponent();
+            controller.Calculate();
         }
+
+        private Controller controller = new Controller();
     }
 }

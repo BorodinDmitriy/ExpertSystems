@@ -22,7 +22,7 @@ namespace NeuroFuzzy
 
             double trnError = 0.0;
             Console.WriteLine();
-            Console.WriteLine();
+            Console.WriteLine("Старт обучения");
             do
             {
                 trnError = trainer.Iteration(input, output, ruleBase);
@@ -33,10 +33,16 @@ namespace NeuroFuzzy
                     _log.Info("Failure! Training error is NAN.");
                     throw new Exception("Failure! Bad system design.");
                 }
+
+                if (epoch % 100 == 0)
+                {
+                    Console.WriteLine("Обучение: " + epoch.ToString() + " итерация. Ошибка: " + trnError);
+                }
             } while (!trainer.isTrainingstoped() && epoch++ < MaxIterations);
 
 
             ANFIS fis = new ANFIS(ruleBase);
+            Console.WriteLine("Завершение обучения");
             _log.Info("Done");
             return fis;
         }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace NeuroFuzzy.rextractors
 {
-    public class KMEANSExtractorIO : IRuleExtractor
+    public class СMEANSExtractorIO : IRuleExtractor
     {
 
         public int RuleNumbers { get; set; }
 
-        public KMEANSExtractorIO(int RuleNumbers)
+        public СMEANSExtractorIO(int RuleNumbers)
         {
             this.RuleNumbers = RuleNumbers;
         }
